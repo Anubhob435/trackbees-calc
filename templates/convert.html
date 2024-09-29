@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Conversion</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        /* Additional styles for the Unit Conversion page */
+        .conversion-box {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #1e1e1e; /* Dark background for the conversion section */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .conversion-box h1 {
+            color: #ffcc00; /* Bright color for the title */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .conversion-section {
+            margin-bottom: 30px;
+        }
+
+        .conversion-section h2 {
+            color: #ffcc00; /* Bright color for section titles */
+            margin-bottom: 10px;
+        }
+
+        .conversion {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 5px 0;
+            color: #fff; /* Text color for conversion */
+        }
+
+        .conversion label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffcc00; /* Bright color for labels */
+        }
+
+        .conversion input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .conversion button {
+            background-color: #ffcc00; /* Bright button color */
+            color: black;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .conversion button:hover {
+            background-color: #e0b000; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar with navigation buttons -->
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a class="sidebar-btn" href="/formulae">Math Formulae</a></li>
+                    <li><a class="sidebar-btn" href="/graph">Graphing</a></li>
+                    <li><a class="sidebar-btn" href="/convert">Unit Conversion</a></li>
+                    <li><a class="sidebar-btn" href="/periodic">Periodic Table</a></li>
+                    <li><a class="sidebar-btn" href="/translate">Translator</a></li>
+                    <li><a class="sidebar-btn" href="/matrix">Matrix Calculator</a></li>
+                    <li><a class="sidebar-btn" href="/">Normal Calculator</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Unit Conversion container -->
+        <div class="conversion-box">
+            <h1>Unit Conversion</h1>
+
+            <div class="conversion-section">
+                <h2>Length</h2>
+                <div class="conversion">
+                    <label for="length-input">Enter Length (meters):</label>
+                    <input type="number" id="length-input" placeholder="Meters" />
+                    <button onclick="convertLength()">Convert</button>
+                    <p id="length-result"></p>
+                </div>
+            </div>
+
+            <div class="conversion-section">
+                <h2>Weight</h2>
+                <div class="conversion">
+                    <label for="weight-input">Enter Weight (kilograms):</label>
+                    <input type="number" id="weight-input" placeholder="Kilograms" />
+                    <button onclick="convertWeight()">Convert</button>
+                    <p id="weight-result"></p>
+                </div>
+            </div>
+
+            <div class="conversion-section">
+                <h2>Temperature</h2>
+                <div class="conversion">
+                    <label for="temperature-input">Enter Temperature (Celsius):</label>
+                    <input type="number" id="temperature-input" placeholder="Celsius" />
+                    <button onclick="convertTemperature()">Convert</button>
+                    <p id="temperature-result"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Conversion functions
+        function convertLength() {
+            const meters = parseFloat(document.getElementById('length-input').value);
+            const feet = meters * 3.28084; // Meters to Feet
+            document.getElementById('length-result').innerText = `${meters} meters = ${feet.toFixed(2)} feet`;
+        }
+
+        function convertWeight() {
+            const kilograms = parseFloat(document.getElementById('weight-input').value);
+            const pounds = kilograms * 2.20462; // Kilograms to Pounds
+            document.getElementById('weight-result').innerText = `${kilograms} kilograms = ${pounds.toFixed(2)} pounds`;
+        }
+
+        function convertTemperature() {
+            const celsius = parseFloat(document.getElementById('temperature-input').value);
+            const fahrenheit = (celsius * 9/5) + 32; // Celsius to Fahrenheit
+            document.getElementById('temperature-result').innerText = `${celsius}°C = ${fahrenheit.toFixed(2)}°F`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Formulae</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        /* Additional styles for the Math Formulae page */
+        .formulae-box {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #1e1e1e; /* Dark background for the formulae section */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .formulae-box h1 {
+            color: #ffcc00; /* Bright color for the title */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .formulae-section {
+            margin-bottom: 30px;
+        }
+
+        .formulae-section h2 {
+            color: #ffcc00; /* Bright color for section titles */
+            margin-bottom: 10px;
+        }
+
+        .formulae {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 5px 0;
+            color: #fff; /* Text color for formulae */
+        }
+
+        .formulae p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar with navigation buttons -->
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a class="sidebar-btn" href="/formulae">Math Formulae</a></li>
+                    <li><a class="sidebar-btn" href="/graph">Graphing</a></li>
+                    <li><a class="sidebar-btn" href="/convert">Unit Conversion</a></li>
+                    <li><a class="sidebar-btn" href="/periodic">Periodic Table</a></li>
+                    <li><a class="sidebar-btn" href="/translate">Translator</a></li>
+                    <li><a class="sidebar-btn" href="/matrix">Matrix Calculator</a></li>
+                    <li><a class="sidebar-btn" href="/">Normal Calculator</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Math Formulae container -->
+        <div class="formulae-box">
+            <h1>Math Formulae</h1>
+
+            <div class="formulae-section">
+                <h2>Algebra</h2>
+                <div class="formulae">
+                    <p><strong>Quadratic Formula:</strong> <em>x = (-b ± √(b² - 4ac)) / 2a</em></p>
+                    <p><strong>Factoring:</strong> <em>ax² + bx + c = a(x - p)(x - q)</em></p>
+                </div>
+            </div>
+
+            <div class="formulae-section">
+                <h2>Geometry</h2>
+                <div class="formulae">
+                    <p><strong>Area of a Circle:</strong> <em>A = πr²</em></p>
+                    <p><strong>Perimeter of a Rectangle:</strong> <em>P = 2(l + w)</em></p>
+                    <p><strong>Pythagorean Theorem:</strong> <em>a² + b² = c²</em></p>
+                </div>
+            </div>
+
+            <div class="formulae-section">
+                <h2>Trigonometry</h2>
+                <div class="formulae">
+                    <p><strong>Sine Rule:</strong> <em>a/sin(A) = b/sin(B) = c/sin(C)</em></p>
+                    <p><strong>Cosine Rule:</strong> <em>c² = a² + b² - 2ab*cos(C)</em></p>
+                </div>
+            </div>
+
+            <div class="formulae-section">
+                <h2>Calculus</h2>
+                <div class="formulae">
+                    <p><strong>Derivative of a function:</strong> <em>f'(x) = lim(h→0) [f(x+h) - f(x)] / h</em></p>
+                    <p><strong>Integral of a function:</strong> <em>∫f(x)dx = F(x) + C</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

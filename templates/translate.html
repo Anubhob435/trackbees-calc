@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        
+
+        .translator-box {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .translator-box h1 {
+            text-align: center;
+            color: #00ffff;
+            margin-bottom: 20px;
+        }
+
+        label, select, textarea {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        button {
+            background-color: #00ffff;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0099cc;
+        }
+
+        .output-box {
+            margin-top: 20px;
+        }
+
+        .output-box h2 {
+            margin-bottom: 10px;
+        }
+
+        .output-box p {
+            padding: 10px;
+            background-color: #444;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar with navigation buttons -->
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a class="sidebar-btn" href="/formulae">Math Formulae</a></li>
+                    <li><a class="sidebar-btn" href="/graph">Graphing</a></li>
+                    <li><a class="sidebar-btn" href="/convert">Unit Conversion</a></li>
+                    <li><a class="sidebar-btn" href="/periodic">Periodic Table</a></li>
+                    <li><a class="sidebar-btn" href="/translate">Translator</a></li>
+                    <li><a class="sidebar-btn" href="/matrix">Matrix Calculator</a></li>
+                    <li><a class="sidebar-btn" href="/">Normal Calculator</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main content for translator -->
+        <div class="content">
+            <div class="translator-box">
+                <h1>Language Translator</h1>
+                <form id="translator-form">
+                    <label for="input-language">From:</label>
+                    <select id="input-language">
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="zh">Chinese</option>
+                        <!-- Add more languages as needed -->
+                    </select>
+
+                    <label for="output-language">To:</label>
+                    <select id="output-language">
+                        <option value="es">Spanish</option>
+                        <option value="en">English</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="zh">Chinese</option>
+                        <!-- Add more languages as needed -->
+                    </select>
+
+                    <label for="text-to-translate">Text:</label>
+                    <textarea id="text-to-translate" placeholder="Enter text to translate..."></textarea>
+
+                    <button type="button" onclick="translateText()">Translate</button>
+                </form>
+
+                <div class="output-box">
+                    <h2>Translation:</h2>
+                    <p id="translated-text">The translated text will appear here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add JavaScript -->
+    <script>
+        function translateText() {
+            const inputLang = document.getElementById('input-language').value;
+            const outputLang = document.getElementById('output-language').value;
+            const text = document.getElementById('text-to-translate').value;
+            const translatedTextElement = document.getElementById('translated-text');
+
+            // Simulating translation logic (replace with an actual translation API)
+            if (text === "") {
+                translatedTextElement.textContent = "Please enter text to translate.";
+            } else {
+                translatedTextElement.textContent = `Translated [${text}] from ${inputLang} to ${outputLang}. (Use API here)`;
+            }
+        }
+    </script>
+</body>
+</html>

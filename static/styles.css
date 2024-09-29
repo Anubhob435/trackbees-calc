@@ -1,0 +1,185 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+}
+
+/* Container holding both sidebar and calculator */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar styling */
+.sidebar {
+    background-color: #222;
+    width: 200px;
+    padding: 20px;
+}
+
+/* Sidebar buttons */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-btn {
+    display: block;
+    background-color: #333;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-btn:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+/* Calculator container */
+.calculator {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #111;
+}
+
+/* Display screen */
+.display input {
+    width: 100%;
+    background-color: #e0e0e0;
+    color: black;
+    border: none;
+    font-size: 2em;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+/* Calculator buttons */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+button:active {
+    background-color: #888;
+}
+
+/* Graphing container */
+.graphing {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #111;
+}
+
+.graphing input {
+    width: 80%;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.2em;
+}
+
+.graphing button {
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.graphing button:hover {
+    background-color: #555;
+}
+
+/* Translator Styles */
+.translator-box {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.translator-box h1 {
+    text-align: center;
+    color: #00ffff;
+    margin-bottom: 20px;
+}
+
+label, select, textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+textarea {
+    height: 150px;
+    resize: none;
+}
+
+button.translate-btn {
+    background-color: #00ffff;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+button.translate-btn:hover {
+    background-color: #0099cc;
+}
+
+.output-box {
+    margin-top: 20px;
+}
+
+.output-box h2 {
+    margin-bottom: 10px;
+}
+
+.output-box p {
+    padding: 10px;
+    background-color: #444;
+    border-radius: 5px;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar with navigation buttons -->
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a class="sidebar-btn" href="/formulae">Math Formulae</a></li>
+                    <li><a class="sidebar-btn" href="/graph">Graphing</a></li>
+                    <li><a class="sidebar-btn" href="/convert">Unit Conversion</a></li>
+                    <li><a class="sidebar-btn" href="/periodic">Periodic Table</a></li>
+                    <li><a class="sidebar-btn" href="/translate">Translator</a></li>
+                    <li><a class="sidebar-btn" href="/">Normal Calculator</a></li>
+                    <li><a class="sidebar-btn" href="/matrix">Translator</a></li>
+
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- Calculator layout -->
+        <main class="calculator">
+            <!-- Display screen -->
+            <div class="display">
+                <input type="text" id="display" disabled />
+            </div>
+            
+            <!-- Calculator buttons -->
+            <div class="buttons">
+                <!-- First row -->
+                <button onclick="clearDisplay()">C</button>
+                <button onclick="deleteLast()">DEL</button>
+                <button onclick="appendToDisplay('/')">÷</button>
+                <button onclick="appendToDisplay('*')">×</button>
+
+                <!-- Second row -->
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button onclick="appendToDisplay('-')">−</button>
+
+                <!-- Third row -->
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button onclick="appendToDisplay('+')">+</button>
+
+                <!-- Fourth row -->
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button onclick="calculateResult()">=</button>
+
+                <!-- Fifth row -->
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="appendToDisplay('.')">.</button>
+                <button onclick="appendToDisplay('(')">(</button>
+                <button onclick="appendToDisplay(')')">)</button>
+
+                <!-- Scientific functions -->
+                <button onclick="appendToDisplay('Math.sin(')">sin</button>
+                <button onclick="appendToDisplay('Math.cos(')">cos</button>
+                <button onclick="appendToDisplay('Math.tan(')">tan</button>
+                <button onclick="appendToDisplay('Math.log(')">log</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Calculator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a class="sidebar-btn" href="/formulae">Math Formulae</a></li>
+                    <li><a class="sidebar-btn" href="/graph">Graphing</a></li>
+                    <li><a class="sidebar-btn" href="/convert">Unit Conversion</a></li>
+                    <li><a class="sidebar-btn" href="/periodic">Periodic Table</a></li>
+                    <li><a class="sidebar-btn" href="/translate">Translator</a></li>
+                    <li><a class="sidebar-btn" href="/matrix">Matrix Calculator</a></li>
+                    <li><a class="sidebar-btn" href="/">Normal Calculator</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Matrix Calculator Main Section -->
+        <main class="calculator">
+            <h1>Matrix Calculator</h1>
+            <form id="matrixForm">
+                <div class="matrix-inputs">
+                    <h2>Matrix A</h2>
+                    <textarea id="matrixA" rows="3" cols="10" placeholder="Enter matrix A (comma-separated)"></textarea>
+                </div>
+                <div class="matrix-inputs">
+                    <h2>Matrix B</h2>
+                    <textarea id="matrixB" rows="3" cols="10" placeholder="Enter matrix B (comma-separated)"></textarea>
+                </div>
+
+                <div class="matrix-actions">
+                    <button type="button" onclick="sendMatrices('add')">Add Matrices</button>
+                    <button type="button" onclick="sendMatrices('multiply')">Multiply Matrices</button>
+                    <button type="button" onclick="sendMatrices('transposeA')">Transpose Matrix A</button>
+                </div>
+            </form>
+            <div class="matrix-result">
+                <h2>Result</h2>
+                <pre id="resultDisplay"></pre>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function sendMatrices(operation) {
+            const matrixA = document.getElementById('matrixA').value;
+            const matrixB = document.getElementById('matrixB').value;
+
+            const data = {
+                matrixA: matrixA,
+                matrixB: matrixB,
+                operation: operation
+            };
+
+            fetch('/matrix', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('resultDisplay').textContent = data.result;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

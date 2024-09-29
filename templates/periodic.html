@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periodic Table</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        /* Additional styles for the Periodic Table page */
+        .periodic-table-container {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #1e1e1e; /* Dark background for the table section */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center-align items */
+            justify-content: center; /* Center items vertically */
+        }
+
+        .periodic-table-container img {
+            max-width: 100%; /* Responsive image */
+            max-height: 80vh; /* Limit height to 80% of viewport height */
+            height: auto;
+            border: 5px solid #ffcc00; /* Border around the image */
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #ffcc00; /* Title color */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar with navigation buttons -->
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a class="sidebar-btn" href="/formulae">Math Formulae</a></li>
+                    <li><a class="sidebar-btn" href="/graph">Graphing</a></li>
+                    <li><a class="sidebar-btn" href="/convert">Unit Conversion</a></li>
+                    <li><a class="sidebar-btn" href="/periodic">Periodic Table</a></li>
+                    <li><a class="sidebar-btn" href="/translate">Translator</a></li>
+                    <li><a class="sidebar-btn" href="/matrix">Matrix Calculator</a></li>
+                    <li><a class="sidebar-btn" href="/">Normal Calculator</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Periodic Table container -->
+        <div class="periodic-table-container">
+            <h1>Periodic Table</h1>
+            <img src="/static/periodic_table.png" alt="Periodic Table">
+        </div>
+    </div>
+</body>
+</html>

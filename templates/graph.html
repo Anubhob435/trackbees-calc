@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphing Calculator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar with navigation buttons -->
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a class="sidebar-btn" href="/formulae">Math Formulae</a></li>
+                    <li><a class="sidebar-btn" href="/graph">Graphing</a></li>
+                    <li><a class="sidebar-btn" href="/convert">Unit Conversion</a></li>
+                    <li><a class="sidebar-btn" href="/periodic">Periodic Table</a></li>
+                    <li><a class="sidebar-btn" href="/translate">Translator</a></li>
+                    <li><a class="sidebar-btn" href="/matrix">Matrix Calculator</a></li>
+                    <li><a class="sidebar-btn" href="/">Normal Calculator</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- Graphing layout -->
+        <main class="graphing">
+            <h2>Graphing Calculator</h2>
+            <div>
+                <input type="text" id="functionInput" placeholder="Enter a function (e.g., x^2 + 2*x + 1)" />
+                <button onclick="plotGraph()">Plot Graph</button>
+            </div>
+            <div id="graph" style="width: 100%; height: 500px;"></div>
+        </main>
+    </div>
+
+    <script>
+        function plotGraph() {
+            const functionInput = document.getElementById('functionInput').value;
+            let xValues = [];
+            let yValues = [];
+
+            for (let x = -10; x <= 10; x += 0.1) {
+                xValues.push(x);
+                try {
+                    // Replace 'x' with actual values in the function string
+                    const parsedFunction = functionInput.replace(/x/g, `(${x})`);
+                    yValues.push(eval(parsedFunction));
+                } catch (error) {
+                    yValues.push(null); // In case of an error, null values will be ignored in the graph
+                }
+            }
+
+            const data = [{
+                x: xValues,
+                y: yValues,
+                type: 'scatter'
+            }];
+
+            Plotly.newPlot('graph', data);
+        }
+    </script>
+</body>
+</html>
