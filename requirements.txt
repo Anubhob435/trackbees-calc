@@ -1,6 +1,4 @@
-Flask==2.2.3
-Jinja2==3.1.2
-Werkzeug==2.2.3
-gunicorn==20.0.4
-numpy
-grpcio
+streamlit>=1.29.0
+numpy>=1.24.0
+plotly>=5.18.0
+matplotlib>=3.7.0
