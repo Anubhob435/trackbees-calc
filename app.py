@@ -11,22 +11,9 @@ def calculator():
 def graph():
     return render_template('graph.html')
 
-# Other routes for formulae, convert, periodic, etc.
-@app.route('/formulae')
-def formulae():
-    return render_template('formulae.html')
-
 @app.route('/convert')
 def convert():
     return render_template('convert.html')
-
-@app.route('/periodic')
-def periodic():
-    return render_template('periodic.html')
-
-@app.route('/translate')
-def translate():
-    return render_template('translate.html')
 
 @app.route('/matrix')
 def matrix_calculator():
