@@ -4,3 +4,4 @@ plotly>=5.18.0
 matplotlib>=3.7.0
 google-generativeai>=0.3.0
 python-dotenv>=1.0.0
+flask>=2.0.1

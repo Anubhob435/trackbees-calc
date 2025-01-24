@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+    <title>Matrix Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-calculator"></i> Calculator Suite</h2>
+            </div>
+            <div class="nav-buttons">
+                <a href="{{ url_for('calculator') }}" class="nav-btn" data-title="Scientific Calculator">
+                    <i class="fas fa-calculator"></i>
+                    <span class="nav-text">Scientific</span>
+                    <span class="nav-description">Complex calculations</span>
+                </a>
+                <a href="{{ url_for('graphing') }}" class="nav-btn" data-title="Graphing Calculator">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="nav-text">Graphing</span>
+                    <span class="nav-description">Plot mathematical functions</span>
+                </a>
+                <a href="{{ url_for('matrix') }}" class="nav-btn active" data-title="Matrix Calculator">
+                    <i class="fas fa-table"></i>
+                    <span class="nav-text">Matrix</span>
+                    <span class="nav-description">Matrix operations</span>
+                </a>
+                <a href="{{ url_for('draw') }}" class="nav-btn" data-title="AI Drawing Calculator">
+                    <i class="fas fa-pencil-alt"></i>
+                    <span class="nav-text">Draw</span>
+                    <span class="nav-description">AI-powered calculations</span>
+                </a>
+                <a href="{{ url_for('converter') }}" class="nav-btn" data-title="Unit Converter">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span class="nav-text">Converter</span>
+                    <span class="nav-description">Unit conversions</span>
+                </a>
+            </div>
+            <div class="sidebar-footer">
+                <button id="themeToggle" class="theme-btn">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="matrix-container">
+                <!-- Matrix A Input -->
+                <div class="matrix-input-group">
+                    <h3>Matrix A</h3>
+                    <div class="matrix-controls">
+                        <div class="dimension-controls">
+                            <input type="number" id="matrixARows" value="2" min="1" max="5" class="dimension-input">
+                            ×
+                            <input type="number" id="matrixACols" value="2" min="1" max="5" class="dimension-input">
+                        </div>
+                        <button onclick="createMatrixA()" class="btn">Create Matrix</button>
+                    </div>
+                    <div id="matrixA" class="matrix-grid"></div>
+                </div>
+
+                <!-- Matrix B Input -->
+                <div class="matrix-input-group">
+                    <h3>Matrix B</h3>
+                    <div class="matrix-controls">
+                        <div class="dimension-controls">
+                            <input type="number" id="matrixBRows" value="2" min="1" max="5" class="dimension-input">
+                            ×
+                            <input type="number" id="matrixBCols" value="2" min="1" max="5" class="dimension-input">
+                        </div>
+                        <button onclick="createMatrixB()" class="btn">Create Matrix</button>
+                    </div>
+                    <div id="matrixB" class="matrix-grid"></div>
+                </div>
+
+                <!-- Operations -->
+                <div class="matrix-operations">
+                    <button onclick="performOperation('Add')" class="btn primary">
+                        <i class="fas fa-plus"></i> Add (A + B)
+                    </button>
+                    <button onclick="performOperation('Multiply')" class="btn primary">
+                        <i class="fas fa-times"></i> Multiply (A × B)
+                    </button>
+                    <button onclick="performOperation('Transpose A')" class="btn primary">
+                        <i class="fas fa-exchange-alt"></i> Transpose A
+                    </button>
+                </div>
+
+                <!-- Result -->
+                <div class="matrix-result">
+                    <h3>Result</h3>
+                    <div id="resultMatrix" class="matrix-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/matrix.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+    <title>Unit Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-calculator"></i> Calculator Suite</h2>
+            </div>
+            <div class="nav-buttons">
+                <a href="{{ url_for('calculator') }}" class="nav-btn" data-title="Scientific Calculator">
+                    <i class="fas fa-calculator"></i>
+                    <span class="nav-text">Scientific</span>
+                    <span class="nav-description">Complex calculations</span>
+                </a>
+                <a href="{{ url_for('graphing') }}" class="nav-btn" data-title="Graphing Calculator">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="nav-text">Graphing</span>
+                    <span class="nav-description">Plot mathematical functions</span>
+                </a>
+                <a href="{{ url_for('matrix') }}" class="nav-btn" data-title="Matrix Calculator">
+                    <i class="fas fa-table"></i>
+                    <span class="nav-text">Matrix</span>
+                    <span class="nav-description">Matrix operations</span>
+                </a>
+                <a href="{{ url_for('draw') }}" class="nav-btn" data-title="AI Drawing Calculator">
+                    <i class="fas fa-pencil-alt"></i>
+                    <span class="nav-text">Draw</span>
+                    <span class="nav-description">AI-powered calculations</span>
+                </a>
+                <a href="{{ url_for('converter') }}" class="nav-btn active" data-title="Unit Converter">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span class="nav-text">Converter</span>
+                    <span class="nav-description">Unit conversions</span>
+                </a>
+            </div>
+            <div class="sidebar-footer">
+                <button id="themeToggle" class="theme-btn">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="converter-container">
+                <div class="converter-tabs">
+                    <button class="converter-tab active" data-type="Length">
+                        <i class="fas fa-ruler"></i> Length
+                    </button>
+                    <button class="converter-tab" data-type="Weight">
+                        <i class="fas fa-weight-hanging"></i> Weight
+                    </button>
+                    <button class="converter-tab" data-type="Temperature">
+                        <i class="fas fa-thermometer-half"></i> Temperature
+                    </button>
+                </div>
+
+                <div class="converter-input-group">
+                    <div class="input-section">
+                        <input type="number" id="inputValue" class="converter-input" placeholder="Enter value">
+                        <span id="inputUnit" class="unit-label">meters</span>
+                    </div>
+                    <div class="converter-arrow">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="output-section">
+                        <input type="text" id="outputValue" class="converter-input" readonly>
+                        <span id="outputUnit" class="unit-label">feet</span>
+                    </div>
+                </div>
+
+                <button id="convertBtn" class="btn primary convert-btn">
+                    <i class="fas fa-sync-alt"></i> Convert
+                </button>
+
+                <div class="conversion-history">
+                    <h3><i class="fas fa-history"></i> Recent Conversions</h3>
+                    <div id="historyList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/converter.js') }}"></script>
+</body>
+</html>

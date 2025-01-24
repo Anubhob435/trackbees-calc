@@ -6,7 +6,31 @@ from scalc import show_scientific_calculator
 from ai_calc import show_ai_calculator
 
 def main():
-    st.set_page_config(page_title="Scientific Calculator", layout="wide")
+    st.set_page_config(page_title="Trackbeez Calculator", layout="wide")
+    
+    # Add title and subtitle with custom styling
+    st.markdown("""
+        <style>
+        .main-title {
+            color: #4a90e2;
+            font-size: 3em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            text-align: center;
+            margin-top: 0;
+            padding-top: 0;
+            margin-bottom: 2em;
+        }
+        </style>
+        <h1 class="main-title">Trackbeez Calc</h1>
+        <p class="subtitle">An interactive and responsive calculator app</p>
+    """, unsafe_allow_html=True)
     
     # Initialize session state for current page if it doesn't exist
     if 'current_page' not in st.session_state:

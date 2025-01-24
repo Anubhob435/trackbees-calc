@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+    <title>Trackbeez Calculator Suite</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+        .calculator-card {
+            background: var(--tool-bg-color);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--primary-color);
+            cursor: pointer;
+        }
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        .card-description {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+        .welcome-section {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-section">
+        <h1 class="main-title">Trackbeez Calculator Suite</h1>
+        <p class="subtitle">Choose your calculator type to get started</p>
+    </div>
+
+    <div class="calculator-grid">
+        <!-- Scientific Calculator -->
+        <div class="calculator-card" onclick="window.location.href='/calculator'">
+            <i class="fas fa-calculator card-icon"></i>
+            <h2 class="card-title">Scientific Calculator</h2>
+            <p class="card-description">Perform complex mathematical calculations with ease</p>
+        </div>
+
+        <!-- Graphing Calculator -->
+        <div class="calculator-card" onclick="window.location.href='/graphing'">
+            <i class="fas fa-chart-line card-icon"></i>
+            <h2 class="card-title">Graphing Calculator</h2>
+            <p class="card-description">Visualize mathematical functions and equations</p>
+        </div>
+
+        <!-- Matrix Calculator -->
+        <div class="calculator-card" onclick="window.location.href='/matrix'">
+            <i class="fas fa-table card-icon"></i>
+            <h2 class="card-title">Matrix Calculator</h2>
+            <p class="card-description">Perform matrix operations and calculations</p>
+        </div>
+
+        <!-- AI Drawing Calculator -->
+        <div class="calculator-card" onclick="window.location.href='/draw'">
+            <i class="fas fa-brain card-icon"></i>
+            <h2 class="card-title">AI Drawing Calculator</h2>
+            <p class="card-description">Solve handwritten math problems using AI</p>
+        </div>
+
+        <!-- Unit Converter -->
+        <div class="calculator-card" onclick="window.location.href='/converter'">
+            <i class="fas fa-exchange-alt card-icon"></i>
+            <h2 class="card-title">Unit Converter</h2>
+            <p class="card-description">Convert between different units of measurement</p>
+        </div>
+    </div>
+
+    <script>
+        // Add theme support
+        const theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+    </script>
+</body>
+</html>
+
