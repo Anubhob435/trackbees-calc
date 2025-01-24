@@ -1,8 +1,3 @@
-I'll help you create a more professional and comprehensive README.md file with better formatting and additional sections.
-
-### [README.md](file:///c%3A/Users/anubh/OneDrive/Desktop/trackbees-calc/README.md)
-
-
 # Trackbeez Calculator Suite 🧮
 
 <div align="center">
@@ -166,14 +161,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - ✅ AI Drawing Recognition
 - 🚧 More features coming soon!
 
-## 📫 Contact
-
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
-
-Project Link: [https://github.com/yourusername/trackbeez-calc](https://github.com/yourusername/trackbeez-calc)
-
 ---
 <div align="center">
 Made with ❤️ by the Trackbeez Team
 </div>
-```
