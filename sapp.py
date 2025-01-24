@@ -3,6 +3,7 @@ import numpy as np
 import plotly.graph_objects as go
 from lovegraph import create_animated_heart
 from scalc import show_scientific_calculator
+from ai_calc import show_ai_calculator
 
 def main():
     st.set_page_config(page_title="Scientific Calculator", layout="wide")
@@ -34,6 +35,8 @@ def main():
         st.session_state.current_page = "Matrix Calculator"
     if st.sidebar.button("Unit Converter", key="unit_conv", use_container_width=True):
         st.session_state.current_page = "Unit Converter"
+    if st.sidebar.button("AI Calculator", key="ai_calc", use_container_width=True):
+        st.session_state.current_page = "AI Calculator"
 
     # Display current page based on session state
     if st.session_state.current_page == "Normal Calculator":
@@ -44,6 +47,8 @@ def main():
         matrix_page()
     elif st.session_state.current_page == "Unit Converter":
         converter_page()
+    elif st.session_state.current_page == "AI Calculator":
+        show_ai_calculator()
 
 def calculator_page():
     st.title("Scientific Calculator")
