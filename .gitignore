@@ -3,3 +3,5 @@ __pycache__/
 .vscode/
 venv/
 *.png
+!logo.png
+!actualimage.png

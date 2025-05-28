@@ -2,16 +2,21 @@
 <html data-theme="dark">
 <head>
     <title>Drawing Board</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/logo-icon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar">
+    <div class="container">        <div class="sidebar">
             <div class="sidebar-header">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Trackbeez Logo" style="max-width: 150px; height: auto; margin-bottom: 1rem;">
                 <h2><i class="fas fa-calculator"></i> Calculator Suite</h2>
-            </div>
-            <div class="nav-buttons">
+            </div>            <div class="nav-buttons">
+                <a href="{{ url_for('home') }}" class="nav-btn" data-title="Home">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-text">Home</span>
+                    <span class="nav-description">Back to main menu</span>
+                </a>
                 <a href="{{ url_for('calculator') }}" class="nav-btn" data-title="Scientific Calculator">
                     <i class="fas fa-calculator"></i>
                     <span class="nav-text">Scientific</span>

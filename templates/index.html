@@ -2,6 +2,7 @@
 <html data-theme="dark">
 <head>
     <title>Trackbeez Calculator Suite</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/logo-icon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -37,15 +38,23 @@
         .card-description {
             color: var(--secondary-color);
             margin-bottom: 1.5rem;
-        }
-        .welcome-section {
+        }        .welcome-section {
             text-align: center;
             padding: 3rem 1rem;
         }
+        .logo-container {
+            margin-bottom: 2rem;
+        }
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
+        }
     </style>
 </head>
-<body>
-    <div class="welcome-section">
+<body>    <div class="welcome-section">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Trackbeez Logo">
+        </div>
         <h1 class="main-title">Trackbeez Calculator Suite</h1>
         <p class="subtitle">Choose your calculator type to get started</p>
     </div>
