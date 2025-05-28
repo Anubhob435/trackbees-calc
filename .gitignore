@@ -5,3 +5,4 @@ venv/
 *.png
 !logo.png
 !actualimage.png
+requirements_backup.txt

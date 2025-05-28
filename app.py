@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 import numpy as np
 import base64
-import google.generativeai as genai
 from dotenv import load_dotenv
 import plotly.graph_objects as go
 import re
 import os
+from pyfiles.geminicall import generate_content
 
 app = Flask(__name__, 
     static_folder='static',
@@ -13,25 +13,10 @@ app = Flask(__name__,
 )
 load_dotenv()
 
-# Configure Gemini API with enhanced settings
+# Check if API key exists
 api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
     raise ValueError("No API key found. Please set the GEMINI_API_KEY environment variable.")
-
-genai.configure(api_key=api_key)
-
-generation_config = {
-    "temperature": 1,
-    "top_p": 0.95,
-    "top_k": 40,
-    "max_output_tokens": 8192,
-    "response_mime_type": "text/plain",
-}
-
-model = genai.GenerativeModel(
-    model_name="gemini-2.0-flash",
-    generation_config=generation_config,
-)
 
 @app.route('/')
 def home():
@@ -174,15 +159,12 @@ def ai_calculate():
         Be precise and show all mathematical steps.
         do not  use * ** in your response"""
         
-        # Generate response from Gemini
-        response = model.generate_content([
-            prompt,
-            {"mime_type": "image/png", "data": image_bytes}
-        ])
+        # Generate response using geminicall
+        response_text = generate_content(prompt, image_bytes)
         
         return jsonify({
             "status": "success",
-            "result": response.text
+            "result": response_text
         })
     except Exception as e:
         return jsonify({
