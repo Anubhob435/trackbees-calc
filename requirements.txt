@@ -1,16 +1,18 @@
 
-numpy>=1.24.0
-plotly>=5.18.0
-matplotlib>=3.7.0
-google-generativeai>=0.3.0
-python-dotenv>=1.0.0
-flask>=2.0.1
-Werkzeug>=2.0.0
-Jinja2>=3.0.0
-itsdangerous>=2.0.0
-click>=8.0.0
-requests>=2.26.0
-gunicorn>=20.1.0  # For production deployment
-pytest>=7.0.0  # For testing
-black>=22.0.0  # For code formatting
-flake8>=4.0.0  # For code linting
+numpy
+plotly
+matplotlib
+google-generativeai
+python-dotenv
+flask
+Werkzeug
+itsdangerous
+click
+requests
+gunicorn
+pytest
+black
+flake8
+
+flask-cors
+uvicorn
