@@ -1,47 +1,50 @@
 <!DOCTYPE html>
-<html data-theme="dark">
+<html lang="en">
 <head>
-    <title>Graphing Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphing Calculator — Trackbeez</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/logo-icon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 </head>
 <body>
-    <div class="container">        <div class="sidebar">
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="container">
+        <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Trackbeez Logo" style="max-width: 150px; height: auto; margin-bottom: 1rem;">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Trackbeez Logo">
                 <h2><i class="fas fa-calculator"></i> Calculator Suite</h2>
-            </div>            <div class="nav-buttons">
+            </div>
+            <div class="nav-buttons">
                 <a href="{{ url_for('home') }}" class="nav-btn" data-title="Home">
                     <i class="fas fa-home"></i>
                     <span class="nav-text">Home</span>
-                    <span class="nav-description">Back to main menu</span>
                 </a>
-                <a href="{{ url_for('calculator') }}" class="nav-btn">
+                <a href="{{ url_for('calculator') }}" class="nav-btn" data-title="Scientific Calculator">
                     <i class="fas fa-calculator"></i>
                     <span class="nav-text">Scientific</span>
-                    <span class="nav-description">Complex calculations</span>
                 </a>
-                <a href="{{ url_for('graphing') }}" class="nav-btn active">
+                <a href="{{ url_for('graphing') }}" class="nav-btn active" data-title="Graphing Calculator">
                     <i class="fas fa-chart-line"></i>
                     <span class="nav-text">Graphing</span>
-                    <span class="nav-description">Plot mathematical functions</span>
                 </a>
-                <a href="{{ url_for('matrix') }}" class="nav-btn">
+                <a href="{{ url_for('matrix') }}" class="nav-btn" data-title="Matrix Calculator">
                     <i class="fas fa-table"></i>
                     <span class="nav-text">Matrix</span>
-                    <span class="nav-description">Matrix operations</span>
                 </a>
-                <a href="{{ url_for('draw') }}" class="nav-btn">
+                <a href="{{ url_for('draw') }}" class="nav-btn" data-title="AI Drawing Calculator">
                     <i class="fas fa-pencil-alt"></i>
                     <span class="nav-text">Draw</span>
-                    <span class="nav-description">AI-powered calculations</span>
                 </a>
-                <a href="{{ url_for('converter') }}" class="nav-btn">
+                <a href="{{ url_for('converter') }}" class="nav-btn" data-title="Unit Converter">
                     <i class="fas fa-exchange-alt"></i>
                     <span class="nav-text">Converter</span>
-                    <span class="nav-description">Unit conversions</span>
                 </a>
             </div>
             <div class="sidebar-footer">
@@ -104,9 +107,53 @@
                 <div class="graph-container">
                     <div id="loveGraphPlot"></div>
                 </div>
+                <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem 1.5rem; margin-top: 1rem; box-shadow: var(--shadow-sm);">
+                    <h3 style="margin: 0 0 0.75rem; font-size: 1rem; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-square-root-alt"></i> Equation Used
+                    </h3>
+                    <div style="background: var(--bg); border-radius: var(--radius-sm); padding: 1rem 1.25rem; font-family: 'Times New Roman', Georgia, serif; font-size: 1.2rem; text-align: center; color: var(--text); line-height: 2;">
+                        <span style="color: var(--accent); font-weight: 600;">y</span> = |<span style="color: var(--accent);">x</span>|<sup style="font-size: 0.8em;">2/3</sup> + 0.9 · √(3.3 − <span style="color: var(--accent);">x</span>²) · sin(<span style="color: var(--text-secondary);">t</span>·π·<span style="color: var(--accent);">x</span>)
+                    </div>
+                    <p style="margin: 0.6rem 0 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
+                        Where <strong style="color: var(--text-secondary);">x</strong> ∈ [−2, 2] and <strong style="color: var(--text-secondary);">t</strong> animates from 0 to 4π across 120 frames.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/graphing.js') }}"></script>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                const icon = toggle.querySelector('i');
+                const label = toggle.querySelector('span');
+                if (theme === 'dark') { icon.className = 'fas fa-sun'; label.textContent = 'Light Mode'; }
+                toggle.addEventListener('click', () => {
+                    const current = document.documentElement.getAttribute('data-theme');
+                    const next = current === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', next);
+                    localStorage.setItem('theme', next);
+                    icon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                    label.textContent = next === 'dark' ? 'Light Mode' : 'Dark Mode';
+                });
+            }
+            const mobileToggle = document.getElementById('mobileToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', () => {
+                    sidebar.classList.toggle('open');
+                    overlay.classList.toggle('active');
+                });
+                overlay.addEventListener('click', () => {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('active');
+                });
+            }
+        })();
+    </script>
 </body>
 </html>

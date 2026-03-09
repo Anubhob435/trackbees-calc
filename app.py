@@ -200,7 +200,7 @@ def create_animated_heart():
     fig.update_layout(
         title={
             'text': "<span style='color: red;'>Animated Love Graph ❤️</span>",
-            'y': 0.9,
+            'y': 0.95,
             'x': 0.5,
             'xanchor': 'center',
             'yanchor': 'top',
@@ -210,34 +210,14 @@ def create_animated_heart():
         xaxis_visible=False,
         yaxis_visible=False,
         plot_bgcolor='rgba(0,0,0,0)',
-        width=1200,
-        height=1000,
-        margin=dict(l=20, r=20, t=60, b=20),
-        updatemenus=[dict(
-            type="buttons",
-            showactive=False,
-            x=0.5,
-            y=1.1,
-            xanchor="center",
-            yanchor="top",
-            pad=dict(t=0, r=0),
-            buttons=[dict(
-                label="▶ Play",
-                method="animate",
-                args=[None, dict(
-                    frame=dict(duration=100, redraw=True),
-                    fromcurrent=True,
-                    mode='immediate',
-                    transition=dict(duration=50),
-                    loop=True
-                )]
-            )]
-        )]
+        paper_bgcolor='rgba(0,0,0,0)',
+        autosize=True,
+        margin=dict(l=20, r=20, t=50, b=20),
     )
     
     # Set axis ranges for better view
-    fig.update_xaxes(range=[-4, 4])
-    fig.update_yaxes(range=[-4, 4])
+    fig.update_xaxes(range=[-3, 3])
+    fig.update_yaxes(range=[-2, 4])
     
     return fig
 

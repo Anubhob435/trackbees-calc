@@ -13,14 +13,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const aiResultContent = document.getElementById('aiResultContent');
     const closeAiResult = document.getElementById('closeAiResult');
 
-    // Add reference to base URL
     const baseUrl = window.location.origin;
 
-    // Set initial color based on theme
-    colorPicker.value = "#ffffff";  // Start with white for dark theme
-    let isDarkTheme = true;
+    // Detect current theme
+    function isDark() {
+        return document.documentElement.getAttribute('data-theme') === 'dark';
+    }
 
-    // Add loading state to buttons
+    // Set initial color based on theme
+    colorPicker.value = isDark() ? "#ffffff" : "#000000";
+
+    // Loading state
     function setButtonLoading(button, isLoading) {
         if (isLoading) {
             button.disabled = true;
@@ -33,36 +36,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Theme toggle function
-    function toggleTheme() {
-        isDarkTheme = !isDarkTheme;
-        document.documentElement.setAttribute('data-theme', isDarkTheme ? 'dark' : 'light');
-        themeBtn.innerHTML = isDarkTheme ? 
-            '<i class="fas fa-moon"></i> Theme' : 
-            '<i class="fas fa-sun"></i> Theme';
+    // Canvas theme toggle (draw page theme btn)
+    function toggleCanvasTheme() {
+        const dark = isDark();
+        const next = dark ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        themeBtn.innerHTML = next === 'dark' ? 
+            '<i class="fas fa-sun"></i> Theme' : 
+            '<i class="fas fa-moon"></i> Theme';
         
-        // Update canvas background and brush color
-        ctx.fillStyle = isDarkTheme ? '#23272a' : '#ffffff';
+        // Update canvas background & brush color
+        ctx.fillStyle = next === 'dark' ? '#1e293b' : '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Update brush color based on theme
-        colorPicker.value = isDarkTheme ? '#ffffff' : '#000000';
+        colorPicker.value = next === 'dark' ? '#ffffff' : '#000000';
+
+        // Also sync the sidebar theme toggle if present
+        const sidebarToggle = document.getElementById('themeToggle');
+        if (sidebarToggle) {
+            const icon = sidebarToggle.querySelector('i');
+            const label = sidebarToggle.querySelector('span');
+            icon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            label.textContent = next === 'dark' ? 'Light Mode' : 'Dark Mode';
+        }
     }
 
-    // Add theme button listener
-    themeBtn.addEventListener('click', toggleTheme);
+    themeBtn.addEventListener('click', toggleCanvasTheme);
 
-    // Set initial canvas background
+    // Set initial btn text
+    themeBtn.innerHTML = isDark() ? 
+        '<i class="fas fa-sun"></i> Theme' : 
+        '<i class="fas fa-moon"></i> Theme';
+
+    // Set canvas background based on theme
     function setCanvasBackground() {
-        ctx.fillStyle = isDarkTheme ? '#23272a' : '#ffffff';
+        ctx.fillStyle = isDark() ? '#1e293b' : '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-    // Set canvas size
+    // Resize canvas
     function resizeCanvas() {
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
-        setCanvasBackground();  // Maintain dark background after resize
+        setCanvasBackground();
     }
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
@@ -72,53 +88,75 @@ document.addEventListener('DOMContentLoaded', function() {
     let lastX = 0;
     let lastY = 0;
 
-    // Drawing functions
+    function getPos(e) {
+        if (e.touches && e.touches.length > 0) {
+            const rect = canvas.getBoundingClientRect();
+            return {
+                x: e.touches[0].clientX - rect.left,
+                y: e.touches[0].clientY - rect.top
+            };
+        }
+        return { x: e.offsetX, y: e.offsetY };
+    }
+
     function draw(e) {
         if (!isDrawing) return;
+        e.preventDefault();
+        const pos = getPos(e);
         
         ctx.beginPath();
         ctx.moveTo(lastX, lastY);
-        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.lineTo(pos.x, pos.y);
         ctx.strokeStyle = colorPicker.value;
         ctx.lineWidth = brushSize.value;
         ctx.lineCap = 'round';
         ctx.stroke();
         
-        [lastX, lastY] = [e.offsetX, e.offsetY];
+        lastX = pos.x;
+        lastY = pos.y;
     }
 
-    // Event listeners
+    // Mouse events
     canvas.addEventListener('mousedown', (e) => {
         isDrawing = true;
         [lastX, lastY] = [e.offsetX, e.offsetY];
     });
-
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', () => isDrawing = false);
     canvas.addEventListener('mouseout', () => isDrawing = false);
 
-    // Update brush size display
+    // Touch events for mobile
+    canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        isDrawing = true;
+        const pos = getPos(e);
+        lastX = pos.x;
+        lastY = pos.y;
+    }, { passive: false });
+    canvas.addEventListener('touchmove', draw, { passive: false });
+    canvas.addEventListener('touchend', () => isDrawing = false);
+    canvas.addEventListener('touchcancel', () => isDrawing = false);
+
+    // Brush size display
     brushSize.addEventListener('input', () => {
         brushSizeValue.textContent = `${brushSize.value}px`;
     });
 
-    // Enhanced clear canvas with confirmation
+    // Clear canvas
     clearBtn.addEventListener('click', () => {
         if (confirm('Are you sure you want to clear the canvas?')) {
             setButtonLoading(clearBtn, true);
             setTimeout(() => {
-                setCanvasBackground();  // Use the function instead of direct color
+                setCanvasBackground();
                 setButtonLoading(clearBtn, false);
-            }, 500);
+            }, 300);
         }
     });
 
-    // Enhanced save functionality with feedback and preview
+    // Save
     saveBtn.addEventListener('click', async () => {
         try {
             setButtonLoading(saveBtn, true);
-            
-            // Create preview
             const timestamp = new Date().toLocaleTimeString();
             const previewDiv = document.createElement('div');
             previewDiv.className = 'drawing-preview';
@@ -126,10 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <img src="${canvas.toDataURL()}" alt="Drawing at ${timestamp}">
                 <div class="preview-time">${timestamp}</div>
             `;
-            
-            // Add preview to container
             drawingsContainer.insertBefore(previewDiv, drawingsContainer.firstChild);
-            
             showNotification('Drawing saved to preview panel', 'success');
         } catch (error) {
             showNotification('Error saving drawing', 'error');
@@ -139,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // AI button handler
+    // AI calculate
     aiBtn.addEventListener('click', async () => {
         try {
             setButtonLoading(aiBtn, true);
@@ -148,9 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const drawing = canvas.toDataURL();
             const response = await fetch(`${baseUrl}/ai-calculate`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ image: drawing })
             });
             
@@ -176,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
         aiResultBox.classList.add('hidden');
     });
 
-    // Add notification system
+    // Notification system
     function showNotification(message, type = 'success') {
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;

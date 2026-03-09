@@ -1,47 +1,49 @@
 <!DOCTYPE html>
-<html data-theme="dark">
+<html lang="en">
 <head>
-    <title>Matrix Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Calculator — Trackbeez</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/logo-icon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <div class="container">
-        <!-- Sidebar Navigation -->        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Trackbeez Logo" style="max-width: 150px; height: auto; margin-bottom: 1rem;">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Trackbeez Logo">
                 <h2><i class="fas fa-calculator"></i> Calculator Suite</h2>
-            </div>            <div class="nav-buttons">
+            </div>
+            <div class="nav-buttons">
                 <a href="{{ url_for('home') }}" class="nav-btn" data-title="Home">
                     <i class="fas fa-home"></i>
                     <span class="nav-text">Home</span>
-                    <span class="nav-description">Back to main menu</span>
                 </a>
                 <a href="{{ url_for('calculator') }}" class="nav-btn" data-title="Scientific Calculator">
                     <i class="fas fa-calculator"></i>
                     <span class="nav-text">Scientific</span>
-                    <span class="nav-description">Complex calculations</span>
                 </a>
                 <a href="{{ url_for('graphing') }}" class="nav-btn" data-title="Graphing Calculator">
                     <i class="fas fa-chart-line"></i>
                     <span class="nav-text">Graphing</span>
-                    <span class="nav-description">Plot mathematical functions</span>
                 </a>
                 <a href="{{ url_for('matrix') }}" class="nav-btn active" data-title="Matrix Calculator">
                     <i class="fas fa-table"></i>
                     <span class="nav-text">Matrix</span>
-                    <span class="nav-description">Matrix operations</span>
                 </a>
                 <a href="{{ url_for('draw') }}" class="nav-btn" data-title="AI Drawing Calculator">
                     <i class="fas fa-pencil-alt"></i>
                     <span class="nav-text">Draw</span>
-                    <span class="nav-description">AI-powered calculations</span>
                 </a>
                 <a href="{{ url_for('converter') }}" class="nav-btn" data-title="Unit Converter">
                     <i class="fas fa-exchange-alt"></i>
                     <span class="nav-text">Converter</span>
-                    <span class="nav-description">Unit conversions</span>
                 </a>
             </div>
             <div class="sidebar-footer">
@@ -52,10 +54,8 @@
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
             <div class="matrix-container">
-                <!-- Matrix A Input -->
                 <div class="matrix-input-group">
                     <h3>Matrix A</h3>
                     <div class="matrix-controls">
@@ -69,7 +69,6 @@
                     <div id="matrixA" class="matrix-grid"></div>
                 </div>
 
-                <!-- Matrix B Input -->
                 <div class="matrix-input-group">
                     <h3>Matrix B</h3>
                     <div class="matrix-controls">
@@ -83,7 +82,6 @@
                     <div id="matrixB" class="matrix-grid"></div>
                 </div>
 
-                <!-- Operations -->
                 <div class="matrix-operations">
                     <button onclick="performOperation('Add')" class="btn primary">
                         <i class="fas fa-plus"></i> Add (A + B)
@@ -96,7 +94,6 @@
                     </button>
                 </div>
 
-                <!-- Result -->
                 <div class="matrix-result">
                     <h3>Result</h3>
                     <div id="resultMatrix" class="matrix-grid"></div>
@@ -105,5 +102,38 @@
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/matrix.js') }}"></script>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                const icon = toggle.querySelector('i');
+                const label = toggle.querySelector('span');
+                if (theme === 'dark') { icon.className = 'fas fa-sun'; label.textContent = 'Light Mode'; }
+                toggle.addEventListener('click', () => {
+                    const current = document.documentElement.getAttribute('data-theme');
+                    const next = current === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', next);
+                    localStorage.setItem('theme', next);
+                    icon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                    label.textContent = next === 'dark' ? 'Light Mode' : 'Dark Mode';
+                });
+            }
+            const mobileToggle = document.getElementById('mobileToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', () => {
+                    sidebar.classList.toggle('open');
+                    overlay.classList.toggle('active');
+                });
+                overlay.addEventListener('click', () => {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('active');
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
